@@ -1,4 +1,37 @@
 html {
-  color: darkturquoise;
+  background-color: #161616;
+  color: #FFFFFF;
+  text-align: left;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+table {
+  margin: auto;
+  width: 1200px;
+  border-collapse: collapse;
+
+}
+
+td {
+  border-color: white;
+  border-style: solid;
+  border-radius: 1px;
+  height: 40px;
+
+}
+
+.upper {
+  background-color: #323232;
+
+}
+
+.lower {
+  background-color: cadetblue;
+
+}
+
+.lower:nth-child(even) {
+  background-color: cornflowerblue;
 
 }
