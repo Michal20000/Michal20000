@@ -1,0 +1,10 @@
+h1, h3, p, a {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal;
+
+}
+
+h1, h3 {
+  font-weight: bold;
+
+}
