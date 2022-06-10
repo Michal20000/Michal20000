@@ -191,17 +191,17 @@ def debug():
 # {% endblock %}
 
 @socketIO.on(CONNECTION, namespace = "/game-room")
-def connectionRoom(data):
+def connectionRoom(data = None):
 	if "_profile" not in flask.session:
 		return
 
 	for game_room in waiting_rooms.values():
 		game_room.join(flask.session["_client"])
-		io.join_room(game_room.game)
+		io.join_room(game_room.game, namespace = "/game-room")
 		break
 	else:
-		game_room = GameRoom(flask.session["_client"])
-		io.join_room(game_room.game)
+		game_room = GameRoom(application, flask.session["_client"])
+		io.join_room(game_room.game, namespace = "/game-room")
 
 	connection = flask.session["_client"]
 	room = clients[connection].game
@@ -211,7 +211,7 @@ def connectionRoom(data):
 
 
 @socketIO.on(DISCONNECTION, namespace = "/game-room")
-def disconnectionRoom():
+def disconnectionRoom(data = None):
 	if "_profile" not in flask.session:
 		return
 
@@ -220,13 +220,29 @@ def disconnectionRoom():
 
 	if room in waiting_rooms:
 		waiting_rooms[room].leave(connection)
-		io.leave_room(room)
+		io.leave_room(room, namespace = "/game-room")
 	elif room in during_game_rooms:
 		during_game_rooms[room].leave(connection)
-		io.leave_room(room)
+		io.leave_room(room, namespace = "/game-room")
 
 	print(F"Disconnection: {connection}")
 	print(F"Room: {room}")
+
+@socketIO.on(DIRECTION, namespace = "/game-room")
+def disconnectionRoom(data = None):
+	if "_profile" not in flask.session:
+		return
+
+	client = clients[flask.session["_client"]]
+
+	if data == DIRECTION_LEFT:
+		client.direction = DIRECTION_LEFT
+	elif data == DIRECTION_UPWARD:
+		client.direction = DIRECTION_UPWARD
+	elif data == DIRECTION_RIGHT:
+		client.direction = DIRECTION_RIGHT
+	elif data == DIRECTION_DOWNWARD:
+		client.direction = DIRECTION_DOWNWARD
 
 
 

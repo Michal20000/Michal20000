@@ -1,11 +1,15 @@
 from globals import *
 from head import Head
+from food import Food
 import threading
+import flask_socketio as io
+import time
 
 
 class GameRoom:
 
-	def __init__(self, client):
+	def __init__(self, application, client):
+		self.application = application
 		self.game = uuid()
 		self.running = True
 		self.clientH = clients[client]
@@ -50,24 +54,31 @@ class GameRoom:
 		self.clientH._direction()
 		self.clientG._direction()
 
-		for i in range(0, 20):
+		for i in range(0, 16):
 			self.board.append(list())
-			for j in range(0, 20):
+			for j in range(0, 16):
 				self.board[i].append(0)
 
 		headH = Head()
 		headH.indexX = 1
 		headH.indexY = 1
 		headG = Head()
-		headG.indexX = 18
-		headG.indexY = 18
+		headG.indexX = 14
+		headG.indexY = 1
 
 		foods = list()
+		foods.append(Food())
+		foods.append(Food())
+		foods.append(Food())
+		foods.append(Food())
+		foods.append(Food())
+		foods.append(Food())
+		foods.append(Food())
+		foods.append(Food())
 
-		# todo: sleep some time
+		time.sleep(1)
 
 		while self.board[headH.indexX][headH.indexY] not in [HOST_NODE, GUEST_HEAD, GUEST_NODE] and self.board[headG.indexX][headG.indexY] not in [HOST_HEAD, HOST_NODE, GUEST_NODE] and self.running:
-			# todo: sleep some time
 
 			if self.clientH.direction == DIRECTION_LEFT:
 				headH.move(-1, 0)
@@ -89,38 +100,55 @@ class GameRoom:
 
 			if self.board[headH.indexX][headH.indexY] == FOOD:
 				headH.attach()
+				# print(headH)
+				# print(headH.node)
+				for food in foods:
+					if food.indexX == headH.indexX and food.indexY == headH.indexY:
+						food.move()
 			if self.board[headG.indexX][headG.indexY] == FOOD:
 				headG.attach()
-			# todo: check maybe something else
-			# todo: if it is some action
-			self.generate(headH, headG, foods)
-			# todo: emit to room
+				# print(headG)
+				# print(headG.node)
+				for food in foods:
+					if food.indexX == headG.indexX and food.indexY == headG.indexY:
+						food.move()
 
+			# todo: check maybe something else
+			# todo: if it is do some action
+			self.generate(headH, headG, foods)
+			with self.application.test_request_context("/"):
+				io.emit(FRAME, self.board, room = self.game, namespace = "/game-room")
+			time.sleep(0.0625)
+			#time.sleep(0.5)
 
 		# todo: someone wins
+		winnerH = True
+		winnerG = True
+
 		if self.running:
+			if self.board[headH.indexX][headH.indexY] in [HOST_NODE, GUEST_HEAD, GUEST_NODE]:
+				winnerH = False
+			if self.board[headG.indexX][headG.indexY] in [HOST_HEAD, HOST_NODE, GUEST_NODE]:
+				winnerG = False
+
+			if winnerH == False and winnerG == False:
+				self.clientH._draws(1)
+				self.clientG._draws(1)
+			elif winnerH == False:
+				self.clientH._losses(1)
+				self.clientG._wins(1)
+			elif winnerG == False:
+				self.clientH._wins(1)
+				self.clientG._losses(1)
+
 			self.clientH._game()
 			self.clientG._game()
 			during_game_rooms.pop(self.game, None)
 		print("Game is finished!")
 
-
-		# todo: running update
-		# todo: rooms-list update
-		# todo: results update
-		# todo: client-game is None
-
-
-		# todo: join when 0 create-game  -- Wait
-		# todo: join when 1 join-game -- Start Game
-		# todo: leave when 1 waiting-game -- Delete Room
-		# todo: leave when 2 during-game -- Lose Game
-		# todo: room is id or pointer?
-		# todo: loop checks if someone left
-
 	def generate(self, headH, headG, foods):
-		for i in range(0, 20):
-			for j in range(0, 20):
+		for i in range(0, 16):
+			for j in range(0, 16):
 				self.board[i][j] = 0
 		for food in foods:
 			self.board[food.indexX][food.indexY] = FOOD
@@ -128,14 +156,14 @@ class GameRoom:
 		self.board[headH.indexX][headH.indexY] = HOST_HEAD
 		self.board[headG.indexX][headG.indexY] = GUEST_HEAD
 
-		buffer = headH.node
+		buffer = headH
 		while buffer.node is not None:
+			buffer = buffer.node
 			self.board[buffer.indexX][buffer.indexY] = HOST_NODE
-			buffer = buffer.node
-		buffer = headG.node
+		buffer = headG
 		while buffer.node is not None:
-			self.board[buffer.indexX][buffer.indexY] = GUEST_NODE
 			buffer = buffer.node
+			self.board[buffer.indexX][buffer.indexY] = GUEST_NODE
 
 	def __repr__(self):
 		return F"<GameRoom game: {self.game} host: {self.clientH}, guest: {self.clientG}>"

@@ -15,3 +15,6 @@ class Node:
 
 		if self.node is not None:
 			self.node.move(self.lastX, self.lastY)
+
+	def __repr__(self):
+		return F"<Node X: {self.indexX} Y: {self.indexY}>"

@@ -18,6 +18,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="globals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -118,22 +119,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="493" y="85" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1654294815224" />
-    <state width="1884" height="237" key="GridCell.Tab.0.bottom" timestamp="1654639664475">
+    <state width="1884" height="237" key="GridCell.Tab.0.bottom" timestamp="1654822506567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1884" height="237" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1654639664475" />
-    <state width="1884" height="237" key="GridCell.Tab.0.center" timestamp="1654639664475">
+    <state width="1884" height="237" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1654822506567" />
+    <state width="1884" height="237" key="GridCell.Tab.0.center" timestamp="1654822506567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1884" height="237" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1654639664475" />
-    <state width="1884" height="237" key="GridCell.Tab.0.left" timestamp="1654639664475">
+    <state width="1884" height="237" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1654822506567" />
+    <state width="1884" height="237" key="GridCell.Tab.0.left" timestamp="1654822506567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1884" height="237" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1654639664475" />
-    <state width="1884" height="237" key="GridCell.Tab.0.right" timestamp="1654639664475">
+    <state width="1884" height="237" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1654822506567" />
+    <state width="1884" height="237" key="GridCell.Tab.0.right" timestamp="1654822506567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1884" height="237" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1654639664475" />
+    <state width="1884" height="237" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1654822506567" />
     <state width="1884" height="298" key="GridCell.Tab.1.bottom" timestamp="1654555679473">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -150,13 +151,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1884" height="298" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1654555679473" />
+    <state x="147" y="0" key="SettingsEditor" timestamp="1654821596905">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="147" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1654821596905" />
     <state x="175" y="65" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1654545582771">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="175" y="65" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1654545582771" />
-    <state x="347" y="0" width="1221" height="1976" key="search.everywhere.popup" timestamp="1654538973377">
+    <state x="347" y="0" width="1221" height="1976" key="search.everywhere.popup" timestamp="1654811013294">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="347" y="0" width="1221" height="1976" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1654538973377" />
+    <state x="347" y="0" width="1221" height="1976" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1654811013294" />
   </component>
 </project>
