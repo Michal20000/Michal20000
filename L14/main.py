@@ -258,5 +258,5 @@ if __name__ == "__main__":
 	connection.close()
 
 	application.debug = True
-	socketIO.run(application)
+	socketIO.run(application, host = "0.0.0.0", port = 1337)
 	# application.run(debug = True)
